@@ -1,11 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
+import { Pokemon } from '@/utils/types'
 
-interface Pokemon {
-  id: number;
-  name: string;
-  height: number;
-}
 
 interface Props {
   pokemon: Pokemon;

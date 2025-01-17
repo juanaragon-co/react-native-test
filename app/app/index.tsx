@@ -3,12 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList, ListRenderItem, Saf
 import { fetchPokemonDetails } from '@/utils/api';
 import { sortElements } from '@/utils';
 import PokemonItem from '@/app/components/PokemonItem'
-
-interface Pokemon {
-  id: number;
-  name: string;
-  height: number;
-}
+import { Pokemon } from '@/utils/types'
 
 export default function HomeScreen() {
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
