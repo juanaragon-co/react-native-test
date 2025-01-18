@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { Text } from 'react-native-paper'
 import { fetchPokemonDetails } from '@/utils/api';
 import { sortElements } from '@/utils';
 import PokemonItem from '@/app/components/PokemonItem';
@@ -36,10 +37,9 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.center}>React Native - Alternova</Text>
       <View style={styles.rows}>
         <View style={styles.row}>
-          <Text style={styles.header}>No Favoritos</Text>
+          <Text variant='headlineSmall'>No Favoritos</Text>
           <FlatList
             data={nonFavorites}
             renderItem={renderPokemon}
@@ -47,7 +47,7 @@ export default function HomeScreen() {
           />
         </View>
         <View style={styles.row}>
-          <Text style={styles.header}>Favoritos</Text>
+          <Text variant='headlineSmall'>Favoritos</Text>
           <FlatList
             data={favorites}
             renderItem={renderPokemon}

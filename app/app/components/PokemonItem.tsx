@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { Pokemon } from '@/utils/types'
+import { Card } from 'react-native-paper'
 
 
 interface Props {
@@ -11,7 +12,8 @@ interface Props {
 const PokemonItem: React.FC<Props> = ({ pokemon, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress(pokemon)}>
-      <Text>{pokemon.name} - {pokemon.height}</Text>
+      <Card.Title title={pokemon.name}>
+      </Card.Title>
     </TouchableOpacity>
   );
 };
