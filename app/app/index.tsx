@@ -1,49 +1,31 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from '@/firebase-config'
-import { TextInput, Button } from 'react-native-paper'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from 'expo-router';
+import Alert from '@/app/components/Alert';
+import useAuth from '@/app/hooks/useAuth';
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigation = useNavigation();
-
-  const app = initializeApp(firebaseConfig)
-  const auth = getAuth(app)
-
-  const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(UserCredential => {
-        navigation.navigate('home')
-        console.log('account create')
-        console.log('user', UserCredential)
-      })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
-
-  const handleLogin = async () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(UserCredential => {
-        navigation.navigate('home')
-        console.log('login')
-        console.log('user', UserCredential)
-      })
-      .catch(error => {
-        console.log('error', error)
-      })
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    alertVisible,
+    hideAlert,
+    handleCreateAccount,
+    handleLogin,
+  } = useAuth(navigation);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Login</Text>
+      {error && <Alert title="Error" content={error || ''} visible={alertVisible} onDismiss={hideAlert} />}
+      <Text style={styles.header}>Bienvenido</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Correo electrónico"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -51,13 +33,13 @@ export default function LoginScreen() {
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Contraseña"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button onPress={handleLogin} buttonColor='red'>Login</Button>
-      <Button onPress={handleCreateAccount} buttonColor='red'>Crear cuenta</Button>
+      <Button onPress={handleLogin} buttonColor='#007BFF' textColor='#FFFFFF' style={styles.button}>Iniciar sesión</Button>
+      <Button onPress={handleCreateAccount} buttonColor='#6C757D' textColor='#FFFFFF' style={styles.button}>Crear cuenta</Button>
     </View>
   );
 }
@@ -67,18 +49,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
+    backgroundColor: "#E9ECEF",
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
+    color: '#495057'
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#CED4DA',
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
   },
+  button: {
+    marginTop: 12,
+    borderRadius: 4,
+  }
 });
+

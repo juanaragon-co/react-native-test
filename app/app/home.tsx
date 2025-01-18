@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper'
+import { Text, Button } from 'react-native-paper'
 import { fetchPokemonDetails } from '@/utils/api';
 import { sortElements } from '@/utils';
+import { useNavigation } from 'expo-router';
 import PokemonItem from '@/app/components/PokemonItem';
 import { Pokemon } from '@/utils/types';
 
 export default function HomeScreen() {
   const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [nonFavorites, setNonFavorites] = useState<Pokemon[]>([]);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -20,6 +23,10 @@ export default function HomeScreen() {
 
     fetchPokemons();
   }, []);
+
+  const handleLogout = () => {
+    navigation.navigate('index')
+  }
 
   const handlePress = (pokemon: Pokemon) => {
     if (favorites.includes(pokemon)) {
@@ -55,6 +62,7 @@ export default function HomeScreen() {
           />
         </View>
       </View>
+      <Button onPress={handleLogout}>Cerrar sesión</Button>
     </SafeAreaView>
   );
 }

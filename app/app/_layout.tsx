@@ -1,4 +1,5 @@
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -27,15 +28,17 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider>
-      <ThemeProvider value={DefaultTheme}>
-        <Stack >
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="home" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </PaperProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <PaperProvider>
+        <ThemeProvider value={DefaultTheme}>
+          <Stack >
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="home" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </ThemeProvider>
+      </PaperProvider>
+    </SafeAreaView>
   );
 }
