@@ -2,7 +2,7 @@
 
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyAcmZ2BHISaJHDwb9JphWtzaoGwCw_62QI",
+  apiKey: "",
   authDomain: "alternova-1c153.firebaseapp.com",
   projectId: "alternova-1c153",
   storageBucket: "alternova-1c153.firebasestorage.app",
