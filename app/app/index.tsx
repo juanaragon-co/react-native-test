@@ -21,7 +21,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      {error && <Alert title="Error" content={error || ''} visible={alertVisible} onDismiss={hideAlert} />}
+      {error && <Alert title="Error de Autenticación" content={error || ''} visible={alertVisible} onDismiss={hideAlert} />}
       <Text style={styles.header}>Bienvenido</Text>
       <TextInput
         style={styles.input}
