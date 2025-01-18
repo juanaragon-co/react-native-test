@@ -12,11 +12,13 @@ interface Props {
 
 const PokemonItem: React.FC<Props> = ({ pokemon, onPress }) => {
   return (
-    <TouchableOpacity onPress={() => onPress(pokemon)} style={styles.container}>
+    <TouchableOpacity onPress={() => onPress(pokemon)} style={styles.container}
+      testID={`pokemon-item-${pokemon.id}`}
+    >
       <Card style={styles.card}>
         <Card.Content>
           <View style={styles.row}>
-            <Image source={{ uri: pokemon.sprites.front_shiny }} style={styles.image} />
+            <Image source={{ uri: pokemon?.sprites?.front_shiny }} style={styles.image} />
             <Text variant="titleLarge" style={styles.title}>{pokemon.name}</Text>
             <Text variant="bodyMedium" style={styles.content}>Height: {pokemon.height}</Text>
           </View>
